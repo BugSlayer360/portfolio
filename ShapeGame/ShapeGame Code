@@ -1,0 +1,194 @@
+// Ender Hale | August 28, 2025 | ShapeGame
+
+
+
+
+
+// Global Variables
+int x, y, w, h, score, xspeed, yspeed, tx, ty, tw;
+float speed = 5; //pixels per frame
+//Hitbox variables
+int circleLeft, circleRight, circleTop, circleBottom;
+int rectLeft, rectRight, rectTop, rectBottom;
+
+// Key tracking
+boolean upPressed = false;
+boolean downPressed = false;
+boolean leftPressed = false;
+boolean rightPressed = false;
+
+
+
+
+
+// Runs once when the app starts
+void setup() {
+  size(500, 500);
+  background(50, 50, 100);
+  frameRate(30);
+
+  //Setting Variables
+  x = 20;
+  y = 20;
+  score = 0;
+  w = 30;
+  h = 30;
+  xspeed = 6;
+  yspeed = 5;
+  tx = int(random(width-tw/2));
+  ty = int(random(height-tw/2));
+  tw = 50;
+}
+
+
+
+
+
+// Runs on a 30 fps loop
+void draw() {
+  background(50);
+
+  //Draw Circle
+  fill(200, 12, 188);
+  ellipse(x, y, w, h);
+
+  // Circle hitbox
+  circleLeft   = x - w/2;
+  circleRight  = x + w/2;
+  circleTop    = y - h/2;
+  circleBottom = y + h/2;
+
+  //Square Hitbox
+  rectLeft   = tx;
+  rectRight  = tx + tw;
+  rectTop    = ty;
+  rectBottom = ty + tw;
+
+  //Make Target Box
+  target();
+
+  //Hitbox Color and Shape For Testing
+  pushStyle();
+  noFill();
+  stroke(0, 255, 0); //green
+  rect(circleLeft, circleTop, w, h);
+  stroke(255, 0, 0); //green
+  rect(rectLeft, rectTop, tw, tw);
+  popStyle();
+  
+  if (keyPressed) {
+    // WASD (letters)
+    if (upPressed) {
+    y-=speed;
+  } 
+    if (leftPressed) {
+    x-=speed;
+  } 
+    if (downPressed) {
+    y+=speed;
+  } 
+    if (rightPressed) {
+    x+=speed;
+  }
+  
+  // Arrow Keys
+  if (keyCode == UP) {
+    y-=speed;
+  } 
+    if (keyCode == LEFT) {
+    x-=speed;
+  } 
+    if (keyCode == DOWN) {
+    y+=speed;
+  } 
+    if (keyCode == RIGHT) {
+    x+=speed;
+  }
+  
+  } 
+  
+  //Collision Detection and Bouncing For Walls
+  if (x>width-w/2 || x<0+w/2) {
+    xspeed = xspeed * -1;
+  }
+
+  if (y>height-h/2 || y<0+h/2) {
+    yspeed = yspeed * -1;
+  }
+
+  //Collision Detection For Target
+  if (circleRight  > rectLeft &&
+    circleLeft   < rectRight &&
+    circleBottom > rectTop &&
+    circleTop    < rectBottom) {
+
+    println("Hit!");
+    score += 1;
+    tx = int(random(width-tw/2));
+    ty = int(random(height-tw/2));
+  }
+
+  updateScore();
+}
+
+
+
+
+
+void keyPressed() {
+  if (key == 'w' || key == 'W') {
+    upPressed = true;
+  } 
+  if (key == 'd' || key == 'D') {
+    rightPressed = true;
+  } 
+  if (key == 's' || key == 'S') {
+    downPressed = true;
+  } 
+  if (key == 'a' || key == 'A') {
+    leftPressed = true;
+  }
+}
+
+
+
+
+void keyReleased() {
+  if (key == 'w' || key == 'W') {
+    upPressed = false;
+  } 
+  if (key == 'd' || key == 'D') {
+    rightPressed = false;
+  } 
+  if (key == 's' || key == 'S') {
+    downPressed = false;
+  } 
+  if (key == 'a' || key == 'A') {
+    leftPressed = false;
+  }
+}
+
+
+
+
+
+void updateScore() {
+  textAlign(CENTER);
+  fill(127, 127);
+  rect(0, 0, width, 30);
+  fill(255);
+  textSize(30);
+  text("Score: " + score, width/2, 25);
+}
+
+
+
+
+
+void target() {
+  float d = dist(x, y, tx, ty);
+  println(d);
+  pushStyle();
+  fill(0, 125, 500);
+  square(tx, ty, tw);
+}
