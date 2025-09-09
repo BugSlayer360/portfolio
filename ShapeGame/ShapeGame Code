@@ -6,6 +6,8 @@ int x, y, w, h, score, tx, ty;
 float speed = 5; //pixels per frame
 float scale;
 float tw;
+boolean start = false;
+PImage sloth1;
 //Hitbox variables
 int circleLeft, circleRight, circleTop, circleBottom;
 float rectLeft, rectRight, rectTop, rectBottom;
@@ -36,6 +38,7 @@ void setup() {
   ty = int(random(height));
   tw = 50;
   scale = 0.2;
+  sloth1 = loadImage("sloth.png");
 }
 
 
@@ -44,79 +47,88 @@ void setup() {
 
 // Runs on a 30 fps loop
 void draw() {
-  background(50);
-
-  //Draw Circle
-  fill(200, 12, 188);
-  ellipse(x, y, w, h);
-
-   //Circle hitbox
-  circleLeft   = x - w/2;
-  circleRight  = x + w/2;
-  circleTop    = y - h/2;
-  circleBottom = y + h/2;
-
-  //Square Hitbox
-  rectLeft   = tx - tw/2;
-  rectRight  = tx + tw/2;
-  rectTop    = ty - tw/2;
-  rectBottom = ty + tw/2;
-
-  //Make Target Box
-  target();
-
-  //Hitbox Color and Shape For Testing
-  pushStyle();
-  fill(0,0);
-  stroke(0, 0); //invisible
-  rect(circleLeft, circleTop, w, h);
-  stroke(0, 0); //invisible
-  rect(rectLeft, rectTop, tw, tw);
-  popStyle();
+  if(start == true) {
+    background(50);
+    fill(200,12,188);
+    target();
+    sloth1.resize(w,h);
+    image(sloth1,x,y);
   
-  //Movement
-  if (keyPressed) {
-    if (upPressed) {
-    y-=speed;
-  } 
-    if (leftPressed) {
-    x-=speed;
-  } 
-    if (downPressed) {
-    y+=speed;
-  } 
-    if (rightPressed) {
-    x+=speed;
-  }
+ 
+
+    //Draw Circle
+    //fill(200, 12, 188);
+    //ellipse(x, y, w, h);
+
+     //Circle hitbox
+    circleLeft   = x - w/2;
+    circleRight  = x + w/2;
+    circleTop    = y - h/2;
+    circleBottom = y + h/2;
+
+    //Square Hitbox
+    rectLeft   = tx - tw/2;
+    rectRight  = tx + tw/2;
+    rectTop    = ty - tw/2;
+    rectBottom = ty + tw/2;
+
+    //Make Target Box
+    target();
+
+    //Hitbox Color and Shape For Testing
+    pushStyle();
+    fill(0,0);
+    stroke(0, 0); //invisible
+    rect(circleLeft, circleTop, w, h);
+    stroke(0, 0); //invisible
+    rect(rectLeft, rectTop, tw, tw);
+    popStyle();
+  
+    //Movement
+    if (keyPressed) {
+      if (upPressed) {
+      y-=speed;
+    } 
+      if (leftPressed) {
+      x-=speed;
+    } 
+      if (downPressed) {
+      y+=speed;
+    } 
+      if (rightPressed) {
+      x+=speed;
+    }
   
   
-  } 
+    } 
   
-  //Collision Detection and Bouncing For Walls
-  //if (x>width-w/2 || x<0+w/2) {
-    //xspeed = xspeed * -1;
-  //}
+    //Collision Detection and Bouncing For Walls
+    //if (x>width-w/2 || x<0+w/2) {
+      //xspeed = xspeed * -1;
+    //}
 
-  //if (y>height-h/2 || y<0+h/2) {
-    //speed = yspeed * -1;
-  //}
+    //if (y>height-h/2 || y<0+h/2) {
+      //speed = yspeed * -1;
+    //}
+  
+    //Collision Detection For Target
+    if (circleRight  >= rectLeft &&
+      circleLeft   <= rectRight &&
+      circleBottom >= rectTop &&
+      circleTop    <= rectBottom) {
+      println("Hit!");
+      score += 1;
+      tx = int(random(width-tw));
+      ty = int(random(height-tw));
+      tw = 50;
+      scale *= 1.05;
+    }  
 
-  //Collision Detection For Target
-  if (circleRight  >= rectLeft &&
-    circleLeft   <= rectRight &&
-    circleBottom >= rectTop &&
-    circleTop    <= rectBottom) {
-    println("Hit!");
-    score += 1;
-    tx = int(random(width-tw));
-    ty = int(random(height-tw));
-    tw = 50;
-    scale *= 1.05;
-  }
-
-  updateScore();
+    updateScore();
+    } else {
+      startScreen();
+   }
 }
-
 
 
 
@@ -146,6 +158,7 @@ void keyPressed() {
   if (keyCode == RIGHT) {
     rightPressed = true;
   }
+  if (keyCode == " ")
 }
 
 
@@ -221,3 +234,15 @@ void gameOver() {
   noLoop();
 }
 
+
+
+
+
+void startScreen() {
+  background(260,100,180);
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  text("Shape Game", width/2, height/2-40);
+  textSize(20);
+  text("Press Spacebar To Start", width/2, height/2+20);
+}
