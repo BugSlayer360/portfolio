@@ -57,8 +57,7 @@ void draw() {
  
 
     //Draw Circle
-    //fill(200, 12, 188);
-    //ellipse(x, y, w, h);
+    ellipse(x, y, w, h);
 
      //Circle hitbox
     circleLeft   = x - w/2;
@@ -158,7 +157,9 @@ void keyPressed() {
   if (keyCode == RIGHT) {
     rightPressed = true;
   }
-  if (keyCode == " ")
+  if (keyCode == ' ') {
+    start = true;
+  }
 }
 
 
