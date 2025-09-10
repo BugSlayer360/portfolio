@@ -9,8 +9,8 @@ float tw;
 boolean start = false;
 PImage sloth1;
 //Hitbox variables
-int circleLeft, circleRight, circleTop, circleBottom;
-float rectLeft, rectRight, rectTop, rectBottom;
+int slothLeft, slothRight, slothTop, slothBottom;
+float targetLeft, targetRight, targetTop, targetBottom;
 
 // Key tracking
 boolean upPressed = false;
@@ -32,12 +32,12 @@ void setup() {
   x = 20;
   y = 20;
   score = 0;
-  w = 30;
-  h = 30;
+  w = 60;
+  h = 60;
   tx = int(random(width));
   ty = int(random(height));
   tw = 50;
-  scale = 0.2;
+  scale = 0.1;
   sloth1 = loadImage("sloth.png");
 }
 
@@ -51,25 +51,26 @@ void draw() {
     background(50);
     fill(200,12,188);
     target();
+    imageMode(CENTER);
     sloth1.resize(w,h);
     image(sloth1,x,y);
   
  
 
     //Draw Circle
-    ellipse(x, y, w, h);
+    //ellipse(x, y, w, h);
 
      //Circle hitbox
-    circleLeft   = x - w/2;
-    circleRight  = x + w/2;
-    circleTop    = y - h/2;
-    circleBottom = y + h/2;
+    slothLeft   = x - w/2;
+    slothRight  = x + w/2;
+    slothTop    = y - h/2;
+    slothBottom = y + h/2;
 
     //Square Hitbox
-    rectLeft   = tx - tw/2;
-    rectRight  = tx + tw/2;
-    rectTop    = ty - tw/2;
-    rectBottom = ty + tw/2;
+    targetLeft   = tx - tw/2;
+    targetRight  = tx + tw/2;
+    targetTop    = ty - tw/2;
+    targetBottom = ty + tw/2;
 
     //Make Target Box
     target();
@@ -78,9 +79,9 @@ void draw() {
     pushStyle();
     fill(0,0);
     stroke(0, 0); //invisible
-    rect(circleLeft, circleTop, w, h);
+    rect(slothLeft, slothTop, w, h);
     stroke(0, 0); //invisible
-    rect(rectLeft, rectTop, tw, tw);
+    rect(targetLeft, targetTop, tw, tw);
     popStyle();
   
     //Movement
@@ -111,10 +112,10 @@ void draw() {
     //}
   
     //Collision Detection For Target
-    if (circleRight  >= rectLeft &&
-      circleLeft   <= rectRight &&
-      circleBottom >= rectTop &&
-      circleTop    <= rectBottom) {
+    if (slothRight  >= targetLeft &&
+      slothLeft   <= targetRight &&
+      slothBottom >= targetTop &&
+      slothTop    <= targetBottom) {
       println("Hit!");
       score += 1;
       tx = int(random(width-tw));
