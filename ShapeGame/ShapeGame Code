@@ -47,7 +47,7 @@ void setup() {
   sloth1 = loadImage("sloth.png");
   mushroom1 = loadImage("mushroom.png");
   chomp = new SoundFile(this, "chomp.wav");
-  womp = new SoundFile(this, "wompwomp.wav");
+  womp = new SoundFile(this, "womp.wav");
 }
 
 
@@ -237,6 +237,7 @@ void gameOver() {
   noLoop();
   showSloth1 = false;
   showMushroom1 = false;
+  womp.play();
   
 }
 
