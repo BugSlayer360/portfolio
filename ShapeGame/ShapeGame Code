@@ -3,11 +3,13 @@
 
 // Global Variables
 int x, y, w, h, score, tx, ty;
-float speed = 5; //pixels per frame
+float speed = 3; //pixels per frame
 float scale;
 float tw;
 boolean start = false;
-PImage sloth1;
+boolean showSloth1 = true;
+boolean showMushroom1 = true;
+PImage sloth1, mushroom1;
 //Hitbox variables
 int slothLeft, slothRight, slothTop, slothBottom;
 float targetLeft, targetRight, targetTop, targetBottom;
@@ -26,7 +28,7 @@ boolean rightPressed = false;
 void setup() {
   size(500, 500);
   background(50, 50, 100);
-  frameRate(30);
+  frameRate(60);
 
   //Setting Variables
   x = 20;
@@ -37,8 +39,9 @@ void setup() {
   tx = int(random(width));
   ty = int(random(height));
   tw = 50;
-  scale = 0.1;
+  scale = 0.03;
   sloth1 = loadImage("sloth.png");
+  mushroom1 = loadImage("mushroom.png");
 }
 
 
@@ -48,12 +51,23 @@ void setup() {
 // Runs on a 30 fps loop
 void draw() {
   if(start == true) {
+    
     background(50);
-    fill(200,12,188);
     target();
-    imageMode(CENTER);
-    sloth1.resize(w,h);
+   
+    
+    
+    if(showSloth1 == true) {
+      imageMode(CENTER);
+      sloth1.resize(w,h);
     image(sloth1,x,y);
+    }
+    
+    if(showMushroom1 == true) {
+      imageMode(CENTER);
+      image(mushroom1,tx,ty,tw,tw);
+    }
+   
   
  
 
@@ -72,17 +86,9 @@ void draw() {
     targetTop    = ty - tw/2;
     targetBottom = ty + tw/2;
 
-    //Make Target Box
-    target();
 
-    //Hitbox Color and Shape For Testing
-    pushStyle();
-    fill(0,0);
-    stroke(0, 0); //invisible
-    rect(slothLeft, slothTop, w, h);
-    stroke(0, 0); //invisible
-    rect(targetLeft, targetTop, tw, tw);
-    popStyle();
+
+   
   
     //Movement
     if (keyPressed) {
@@ -116,12 +122,12 @@ void draw() {
       slothLeft   <= targetRight &&
       slothBottom >= targetTop &&
       slothTop    <= targetBottom) {
-      println("Hit!");
       score += 1;
+      scale = 0.03 + score * 0.005;      
+      tw = 50;
       tx = int(random(width-tw));
       ty = int(random(height-tw));
-      tw = 50;
-      scale *= 1.05;
+
     }  
 
     updateScore();
@@ -212,17 +218,12 @@ void updateScore() {
 void target() {
   float d = dist(x, y, tx, ty);
   println(d);
-  pushStyle();
-  fill(0, 125, 500);
-  rectMode(CENTER);
-  rect(tx, ty, tw, tw);
-  popStyle();
-  
-  if (tw < 2) {
+  //shrink mushroom
+  tw -= scale;
+  if (tw < 1) {
     gameOver();
-  } else {
-    tw -= scale;
   }
+ 
 }
 
 
@@ -234,6 +235,9 @@ void gameOver() {
   fill(255);
   text("Game Over",width/2, height/2);
   noLoop();
+  showSloth1 = false;
+  showMushroom1 = false;
+  
 }
 
 
