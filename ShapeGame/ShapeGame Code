@@ -2,6 +2,7 @@
 
 
 // Global Variables
+import processing.sound.*;
 int x, y, w, h, score, tx, ty;
 float speed = 3; //pixels per frame
 float scale;
@@ -10,6 +11,9 @@ boolean start = false;
 boolean showSloth1 = true;
 boolean showMushroom1 = true;
 PImage sloth1, mushroom1;
+SoundFile chomp;
+SoundFile womp;
+
 //Hitbox variables
 int slothLeft, slothRight, slothTop, slothBottom;
 float targetLeft, targetRight, targetTop, targetBottom;
@@ -42,6 +46,8 @@ void setup() {
   scale = 0.03;
   sloth1 = loadImage("sloth.png");
   mushroom1 = loadImage("mushroom.png");
+  chomp = new SoundFile(this, "chomp.wav");
+  womp = new SoundFile(this, "wompwomp.wav");
 }
 
 
@@ -108,16 +114,6 @@ void draw() {
   
     } 
   
-    //Collision Detection and Bouncing For Walls
-    //if (x>width-w/2 || x<0+w/2) {
-      //xspeed = xspeed * -1;
-    //}
-
-    //if (y>height-h/2 || y<0+h/2) {
-      //speed = yspeed * -1;
-    //}
-  
-    //Collision Detection For Target
     if (slothRight  >= targetLeft &&
       slothLeft   <= targetRight &&
       slothBottom >= targetTop &&
@@ -127,8 +123,13 @@ void draw() {
       tw = 50;
       tx = int(random(width-tw));
       ty = int(random(height-tw));
-
-    }  
+      
+      if(chomp.isPlaying()){
+        chomp.stop();
+      } else {
+        chomp.play();
+      }
+  }  
 
     updateScore();
     } else {
@@ -223,9 +224,8 @@ void target() {
   if (tw < 1) {
     gameOver();
   }
- 
+  
 }
-
 
 
 
