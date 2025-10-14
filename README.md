@@ -4,7 +4,7 @@
 
 ### SpaceGame Project
 
-![SpaceGame (https://github.com/BugSlayer360/portfolio/blob/main/images/spacegame.png?raw=true)
+![SpaceGame](https://github.com/BugSlayer360/portfolio/blob/main/images/spacegame.png?raw=true)
 
 Description detail here:
 
