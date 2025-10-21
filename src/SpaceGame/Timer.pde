@@ -1,3 +1,6 @@
+// Daniel Shiffman
+// Example 10-5 Timer
+
 class Timer {
 
   int savedTime; // When Timer started
@@ -29,3 +32,4 @@ class Timer {
     return passedTime > totalTime;
   }
 }
+
