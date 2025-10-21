@@ -4,11 +4,11 @@
 
 ### SpaceGame Project
 
-![SpaceGame](https://github.com/BugSlayer360/portfolio/blob/main/images/spacegame.png?raw=true)
+![SpaceGame]()
 
 Description detail here:
 
-* [Windows EXE](https://github.com/BugSlayer360/portfolio/blob/main/src/SpaceGame/windows-amd64.zip)
-* [Mac App](https://github.com/BugSlayer360/portfolio/blob/main/src/SpaceGame/macos-aarch64.zip)
-* [Linux EXxecutable]()
+* [Windows EXE]()
+* [Mac App]()
+* [Linux Executable]()
 * [Source Code]()
