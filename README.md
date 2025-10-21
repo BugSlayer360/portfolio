@@ -4,7 +4,7 @@
 
 ### SpaceGame Project
 
-![SpaceGame](https://github.com/BugSlayer360/portfolio/blob/main/images/spacegamepicture.png)
+![SpaceGame](https://github.com/BugSlayer360/portfolio/blob/main/images/spacegamepicture.png?raw=true)
 
 About the game:      SpaceGame is a fun little project I worked on for a while. It is a defending game, where you control a little spaceship with your mouse and shoot down rocks before it destroys Earth. There is powerups and more lasers and bosses. I hope you have fun!
 
