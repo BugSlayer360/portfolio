@@ -9,6 +9,5 @@
 Description detail here:
 
 * [Windows EXE](https://github.com/BugSlayer360/portfolio/blob/main/src/SpaceGame/windows-amd64.zip)
-* [Mac App]()
-* [Linux Executable]()
+* [Mac App](https://github.com/BugSlayer360/portfolio/blob/main/src/SpaceGame/macos-aarch64.zip)
 * [Source Code](https://github.com/BugSlayer360/portfolio/tree/main/src/SpaceGame)
