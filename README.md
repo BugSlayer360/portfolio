@@ -6,9 +6,17 @@
 
 ![SpaceGame](https://github.com/BugSlayer360/portfolio/blob/main/images/spacegamepicture.png?raw=true)
 
-###### About the game:      
+##### About the game:      
 
-SpaceGame is a fun little project I worked on for a quarter in high school. It is a game, where you control a little spaceship with your mouse and shoot down rocks before it destroys Earth. There is powerups and lasers and bosses. Try to advance in levels and stay alive! Don't let the rocks pass you, and kill the big patrick boss. I hope you have fun!
+Embark on a thrilling cosmic adventure in SpaceGame, a space-themed action title developed as part of a personal portfolio project. You pilot a lone spacecraft navigating the vastness of space, facing mounting waves of enemy ships and obstacles in an effort to survive and rack up points.
+###### Key features include:
+* Fast-paced, arcade-style gameplay where reflexes and positioning matter.
+* A dynamic challenge that escalates as enemy numbers and intensity increase.
+* Simple yet responsive controls enabling fluid maneuvering through tight spaces and enemy fire.
+* Visuals and audio designed to evoke the classic space-shooter feel with a modern twist.
+* A scoring/timer system that encourages replayability—strive to beat your high score or survive for longer durations.
+
+Whether you’re a fan of retro shooters or just looking for an engaging space combat experience, SpaceGame offers a fun, tightly-designed gameplay loop that showcases both design and programming craftsmanship.
 
 #### Downloads:
 * [Windows EXE](https://github.com/BugSlayer360/portfolio/blob/main/src/SpaceGame/windows-amd64.zip)
